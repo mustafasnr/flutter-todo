@@ -65,8 +65,14 @@ class OnboardView extends StatelessWidget {
         ),
         bottomSheet: Container(
           padding: EdgeInsets.all(32.dm),
-          height: 400.h,
-          color: const Color.fromRGBO(18, 18, 18, 1),
+          height: 399.h,
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(18, 18, 18, 1),
+            border: Border.all(
+              width: 1.h,
+              color: Color.fromRGBO(18, 18, 18, 1),
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,

@@ -21,7 +21,7 @@ class IndexView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 13.h),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -50,7 +50,62 @@ class IndexView extends StatelessWidget {
                   ],
                 ),
               ),
-              const IndexPlaceholder(),
+              // const IndexPlaceholder(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.r),
+                        color: Colors.transparent,
+                        border: Border.all(
+                          width: 1,
+                          color: const Color.fromRGBO(151, 151, 151, 1),
+                        ),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                          Expanded(
+                            child: TextField(
+                              style: GoogleFonts.lato(
+                                fontSize: 16.sp,
+                                height: 1.5,
+                                color: Colors.white,
+                              ),
+                              decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 12.w),
+                                border: InputBorder.none,
+                                hintText: "Search for your task...",
+                                hintStyle: GoogleFonts.lato(
+                                  fontSize: 16.sp,
+                                  height: 1.5,
+                                  color: const Color.fromRGBO(175, 175, 175, 1),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 20.h),
+                    const TodoFilter(filter: "Today"),
+                    SizedBox(height: 16.h),
+                    const SingleTodo(),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -264,6 +319,166 @@ class IndexView extends StatelessWidget {
   }
 }
 
+class TodoFilter extends StatelessWidget {
+  final String filter;
+  const TodoFilter({super.key, required this.filter});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(93, 93, 93, 1),
+        borderRadius: BorderRadius.circular(4.r),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            filter,
+            style: GoogleFonts.lato(
+              fontSize: 12.sp,
+              height: 21 / 12,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(width: 10.w),
+          Icon(
+            Icons.arrow_downward,
+            size: 16.dm,
+            color: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SingleTodo extends StatelessWidget {
+  const SingleTodo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(55, 55, 55, 1),
+        borderRadius: BorderRadius.circular(4.r),
+      ),
+      child: Row(
+        children: [
+          Radio(
+            visualDensity: const VisualDensity(
+                horizontal: VisualDensity.minimumDensity,
+                vertical: VisualDensity.minimumDensity),
+            fillColor: const WidgetStatePropertyAll(Colors.white),
+            overlayColor: const WidgetStatePropertyAll(Colors.white24),
+            value: true,
+            groupValue: true,
+            onChanged: (value) {
+              debugPrint("$value");
+            },
+          ),
+          SizedBox(width: 10.w),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Do Math Homework",
+                  style: GoogleFonts.lato(
+                    fontSize: 16.sp,
+                    height: 21 / 16,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 12.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Today at 16:45",
+                      style: GoogleFonts.lato(
+                        fontSize: 14.sp,
+                        height: 1.5,
+                        color: const Color.fromRGBO(175, 175, 175, 1),
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 8.w, vertical: 7.5.w),
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        borderRadius: BorderRadius.circular(4.r),
+                      ),
+                      alignment: Alignment.center,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.cake,
+                            color: Colors.black,
+                            size: 16.sp,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            "Grocery",
+                            style: GoogleFonts.lato(
+                              fontSize: 12.sp,
+                              height: 1.75,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 12.w),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 8.w, vertical: 6.5.w),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(4.r),
+                        border: Border.all(
+                          width: 1,
+                          color: Color.fromRGBO(134, 135, 255, 1),
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.flag,
+                            color: Colors.black,
+                            size: 16.sp,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            "3",
+                            style: GoogleFonts.lato(
+                              fontSize: 12.sp,
+                              height: 1.75,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class CategoryDialog extends StatelessWidget {
   const CategoryDialog({super.key});
 
@@ -429,124 +644,135 @@ class PriorityDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: Container(
-        padding: EdgeInsets.all(10.w),
-        width: 327.w,
-        height: 360.h,
-        decoration: BoxDecoration(
-            color: const Color.fromRGBO(54, 54, 54, 1),
-            borderRadius: BorderRadius.circular(4.r),
-            border: Border.all(
-              width: 0,
-              color: Colors.transparent,
-            )),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              "Task Priority",
-              style: GoogleFonts.lato(
-                fontSize: 16.sp,
-                height: 1.25,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
-            const Divider(),
-            SizedBox(height: 20.h),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.start,
-              spacing: 10.r,
-              runSpacing: 10.r,
-              children: List.generate(
-                10,
-                (index) => Container(
-                  alignment: Alignment.center,
-                  width: 64.r,
-                  height: 64.r,
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(39, 39, 39, 1),
-                    borderRadius: BorderRadius.circular(4.r),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Icon(
-                        Icons.flag,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        (index + 1).toString(),
-                        style: GoogleFonts.lato(
-                          fontSize: 16.sp,
-                          height: 1.4,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(10.w),
+          width: 327.w,
+          decoration: BoxDecoration(
+              color: const Color.fromRGBO(54, 54, 54, 1),
+              borderRadius: BorderRadius.circular(4.r),
+              border: Border.all(
+                width: 0,
+                color: Colors.transparent,
+              )),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Task Priority",
+                style: GoogleFonts.lato(
+                  fontSize: 16.sp,
+                  height: 1.25,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
                 ),
               ),
-            ),
-            SizedBox(height: 16.h),
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(vertical: 11.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
-                        border: Border.all(
-                          width: 1,
-                          color: Color.fromRGBO(134, 135, 255, 1),
+              const Divider(),
+              SizedBox(height: 20.h),
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.start,
+                spacing: 10.r,
+                runSpacing: 10.r,
+                children: List.generate(
+                  10,
+                  (index) => Priority(index: index),
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(vertical: 11.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4.r),
+                          border: Border.all(
+                            width: 1,
+                            color: const Color.fromRGBO(134, 135, 255, 1),
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        "Cancel",
-                        style: GoogleFonts.lato(
-                          fontSize: 16.sp,
-                          height: 1.5,
-                          color: Color.fromRGBO(134, 135, 255, 1),
+                        child: Text(
+                          "Cancel",
+                          style: GoogleFonts.lato(
+                            fontSize: 16.sp,
+                            height: 1.5,
+                            color: const Color.fromRGBO(134, 135, 255, 1),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(width: 16.w),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(134, 135, 255, 1),
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                      child: Text(
-                        "Save",
-                        style: GoogleFonts.lato(
-                          fontSize: 16.sp,
-                          height: 1.5,
-                          color: Colors.white,
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(vertical: 12.h),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(134, 135, 255, 1),
+                          borderRadius: BorderRadius.circular(4.r),
+                        ),
+                        child: Text(
+                          "Save",
+                          style: GoogleFonts.lato(
+                            fontSize: 16.sp,
+                            height: 1.5,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            )
-          ],
+                  )
+                ],
+              )
+            ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class Priority extends StatelessWidget {
+  final int? index;
+  const Priority({super.key, this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: 64.r,
+      height: 64.r,
+      decoration: BoxDecoration(
+        color: const Color.fromRGBO(39, 39, 39, 1),
+        borderRadius: BorderRadius.circular(4.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const Icon(
+            Icons.flag,
+            color: Colors.white,
+          ),
+          Text(
+            index != null ? (index! + 1).toString() : 0.toString(),
+            style: GoogleFonts.lato(
+              fontSize: 16.sp,
+              height: 1.4,
+              color: Colors.white,
+            ),
+          )
+        ],
       ),
     );
   }

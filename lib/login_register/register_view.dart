@@ -99,6 +99,9 @@ class RegisterView extends StatelessWidget {
                   ),
                   SizedBox(height: 24.h),
                   GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/index");
+                    },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                       decoration: BoxDecoration(
